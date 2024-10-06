@@ -9,8 +9,8 @@ from aiogram.types import Message, BotCommand, PreCheckoutQuery, FSInputFile
 bot = Bot(token='123:ABC')
 dp = Dispatcher()
 
-PROVIDER_TOKEN = '401643678:TEST:78de6c4b-372b-47b9-ad90-e6b48eeea748'
-FILENAME = 'Грокаем_алгоритмы_Библиотека_программиста_2022.pdf'
+PROVIDER_TOKEN = '123:ABC'
+FILENAME = 'Файл.pdf'
 
 # НЕ РАБОТАЕТ
 # @dp.message(Command(commands='inline_pay'))
@@ -19,7 +19,7 @@ FILENAME = 'Грокаем_алгоритмы_Библиотека_програ�
 #     kb.button(text=f"Оплатить 20 ⭐️", pay=True)  # Кнопка с оплатой всегда первая
 #     await message.answer('Вам выставлен счет за оплату услуг', reply_markup=kb.as_markup())
 
-
+@dp.message(Command(commands='start'))
 @dp.message(Command(commands='create_invoice'))
 async def create_invoice(message: Message):
     payment_id = str(uuid.uuid4())  # Идентификатор для платежа
@@ -49,8 +49,6 @@ async def success_payment_handler(message: Message):
 
 async def main():
     main_menu_commands = [
-        BotCommand(command='/inline_pay',
-                   description='Параметр pay=True'),
         BotCommand(command='/create_invoice',
                    description='Большие возможности')
     ]
